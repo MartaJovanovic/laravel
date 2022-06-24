@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table -> foreignId("service_id");
             $table->integer('rate');
             $table->text('body');
             $table->timestamps();

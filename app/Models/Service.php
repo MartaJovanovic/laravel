@@ -13,4 +13,11 @@ class Service extends Model
         'title',
         'price',
     ];
+
+    public function reviews()
+{
+    return $this->hasMany(Review::class);
 }
+}
+
+

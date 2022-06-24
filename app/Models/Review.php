@@ -13,4 +13,11 @@ class Review extends Model
         'rate',
         'body',
     ];
+
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, "service_id");
+    }
+
 }
