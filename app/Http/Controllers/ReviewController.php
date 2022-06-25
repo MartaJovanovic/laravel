@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Http\Resources\ReviewResource;
+use App\Http\Resources\ReviewCollection;
 use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
@@ -15,8 +17,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all();
-        return $reviews;
+        $review = Review::all();
+        return new ReviewCollection($review);
     }
 
     /**
@@ -48,7 +50,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+        return new ReviewResource($review);
     }
 
     /**
