@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -14,7 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::all();
+        return $services;
     }
 
     /**
@@ -46,7 +48,10 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        $service = Service::find($service_id);
+        if (is_null($service))
+            return response()->json('Data not found', 404);
+        return response()->json($service);
     }
 
     /**
