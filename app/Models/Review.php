@@ -12,6 +12,8 @@ class Review extends Model
     protected $fillable = [
         'rate',
         'body',
+        "service_id",
+        "user_id"
     ];
 
 

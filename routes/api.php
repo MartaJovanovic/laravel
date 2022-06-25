@@ -41,29 +41,20 @@ Route::resource('reviews', ReviewController::class)->only(['index']);
 Route::get('/service/{id}/review', [ServiceReviewController::class, 'index'])->name('service.review.index');
 
 
+Route::post('/register', [AuthController::class, 'register']);
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! OBRATI PAZNJU
-//ova linija je bila greska
-//Route::resource('posts', [PostController::class]);
-//drugi parametar kod resource-a nema niz vec samo PostController::class
-// Route::resource('posts', PostController::class);
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::delete('review/{id}', [ReviewController::class, 'destroy']);
 
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function (Request $request) {
+        return auth()->user();
+    });
 
 
-// Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
-// Route::post('/login', [AuthController::class, 'login']);
+});
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
-//     Route::get('/profile', function (Request $request) {
-//         return auth()->user();
-//     });
-
-//     Route::resource('posts', PostController::class)->only(['update', 'store', 'destroy']);
-
-//     Route::post('/logout', [AuthController::class, 'logout']);
-// });
-
-// Route::resource('posts', PostController::class)->only(['index']);
